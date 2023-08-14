@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | Modifier{% endblock %}
+
+{% block h1 %}Modifier{% endblock %}
+
+{% block body %}
+
+    <a class="btn btn-primary" href="{{ path('produit_afficher') }}">Retour</a>
+
+
+    {{ form_start(formProduit) }} {# ouverture de la balise <form> #}
+
+        <div class="row mx-0">
+            {{ form_row(formProduit.titre) }}
+            {{ form_row(formProduit.prix) }}
+        </div>
+
+        {# {{ form_row(formProduit.description) }} #}
+        <div class="border border-dark p-3 rounded">
+            {{ form_widget(formProduit.description) }}
+            {{ form_label(formProduit.description) }}
+            {{ form_help(formProduit.description) }}
+            {{ form_errors(formProduit.description) }}
+        </div>
+
+        {# form_rest() permet d'afficher tous les éléments du formulaire non appelés #}
+        {{ form_rest(formProduit) }}
+
+        <input type="submit" value="Modifier" class="btn btn-info col-12 mt-3">
+
+    {{ form_end(formProduit) }} {# fermeture de la balise </form> #}
+
+
+{% endblock %}

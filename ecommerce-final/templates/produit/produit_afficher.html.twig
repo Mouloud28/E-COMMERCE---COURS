@@ -1,0 +1,88 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ parent() }} | Gestion des produits{% endblock %}
+
+{% block h1 %}Gestion des produits{% endblock %}
+
+{% block body %}
+
+    <a class="btn btn-primary" href="{{ path('produit_ajouter') }}">Ajouter</a>
+
+    
+    {# si le tableau produits n'est pas vide #}
+    {% if produits %}
+        
+
+
+        <table class="table text-center mt-3">
+
+            <thead class="table-primary">
+                <tr>
+                    <th>ID</th>
+                    <th>Titre</th>
+                    <th>Prix (€)</th>
+                    <th>Description</th>
+                    <th>Catégorie</th>
+                    <th>Matière</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            {#
+                rappel : produits est un tableau d'objets
+                en le bouclant, on extrait à chaque tour de boucle un objet produit
+                on n'affiche un objet mais les propriétés qui s'y trouvent (exemple actuel : id, titre, prix ...)
+                syntaxe : "parent.enfant" ==> objet.propriété
+
+                avec les relations, les propriétés sont des objets ( ou un tableau d'objets)
+                objet.objet.propriété
+            #}
+
+            <tbody>
+                {% for produit in produits %}
+                {# {{ dump(produit) }} #}
+                    <tr>
+                        <td>{{ produit.id }}</td>
+                        <td>{{ produit.titre|capitalize }}</td>
+                        <td>{{ produit.prix }}</td>
+
+                        <td>
+                            {% if produit.description %}
+                                {{ produit.description}}
+                            {% else %}
+                                <span class="text-danger fst-italic">N.R</span>
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if produit.categorie %}
+                                {{ produit.categorie.nom }}
+                            {% else %}
+                                <span class="text-danger fst-italic">N.R</span>
+                            {% endif %}
+                        </td>
+                        
+                        <td style="width:280px">
+                            <a class="btn btn-warning text-white" href="{{ path(  'produit_fiche' , {'id' : produit.id }) }}">Fiche</a>
+
+                            {# <a href="{{ path( '' , {} ) }}"></a> #}
+                
+                            <a class="btn btn-info text-white" href="{{ path('produit_modifier', {'id' : produit.id }) }}">Modifier</a>
+              
+                            <a 
+                                class="btn btn-danger text-white" 
+                                href="{{ path('produit_supprimer', {'id' : produit.id }) }}"
+                                onclick="return confirm('souhaitez-vous vraiment supprimer ce produit ?')"
+                            >Supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        
+        </table>
+
+    {% else %}{# si le tableau produits est vide #}
+        <h4 class="text-center text-danger fst-italic mt-3">Il n'y a aucun produit actuellement</h4>
+    {% endif %}
+
+{% endblock %}

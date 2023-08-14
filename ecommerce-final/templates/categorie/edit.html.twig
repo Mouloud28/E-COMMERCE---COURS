@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier la catégorie{% endblock %}
+{% block h1 %}Modifier la catégorie{% endblock %}
+
+{% block stylesheets %}
+
+    <style>
+        form{
+            width: 50%;
+            margin: 0 auto;
+        }
+    </style>
+
+{% endblock %}
+
+{% block body %}
+
+    <a class="btn btn-primary" href="{{ path('app_categorie_index') }}">Retour</a>
+
+    {{ include('categorie/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+
+    
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}{# héritage #}
+
+{% block title %}{{ parent() }} | TEST{% endblock %}
+
+{% block body %}
+    <p style="color:yellow">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Omnis dolorum cupiditate voluptatem excepturi aspernatur laborum architecto blanditiis consequuntur, ut aliquam?</p>
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        p{
+            color:orangered!important;
+        }
+    </style>
+{% endblock %}
+
+{% block h1 %}hello{% endblock %}
+
+

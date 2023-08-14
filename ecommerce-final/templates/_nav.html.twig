@@ -1,0 +1,72 @@
+<nav class="navbar navbar-expand-lg bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white" href="{{ path('home') }}">Ecommerce</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ path('testName') }}">Test</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ path('catalogue') }}">Catalogue</a>
+                </li>
+                {#
+                    La fonction twig path() permet de rediriger sur des liens internes.
+                    2 arguments :
+                        - 1e argument obligatoire (str) : nom de la route
+                        - 2e argument facultatif (array) : tableau des paramètres
+                            en php  : ['key' => 'value']
+                            en twig : {'key' : 'value'}
+
+                            key : nom du paramètre
+                            value: valeur du paramètre
+                #} 
+
+                {#-------------------------------------------------------------------------------------#}
+
+                {% if app.user %} {# connecté #}
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ path('app_profil') }}">Profil</a>
+                    </li>
+
+                    {% if is_granted('ROLE_ADMIN') %} {# connecté + ROLE_ADMIN #}
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ path('produit_afficher') }}">Gestion des produits</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ path('app_categorie_index') }}">Gestion des catégories</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{ path('app_matiere_index') }}">Gestion des matières</a>
+                        </li>
+                    {% endif %}
+
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ path('app_logout') }}">Déconnexion</a>
+                    </li>
+                    
+                {% else %}{# non connecté #}
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ path('app_register') }}">Inscription</a>
+                    </li>
+        
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ path('app_login') }}">Connexion</a>
+                    </li>
+
+                {% endif %}
+
+                
+            </ul>
+        </div>
+    </div>
+</nav>

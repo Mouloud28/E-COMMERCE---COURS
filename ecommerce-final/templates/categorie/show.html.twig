@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ categorie.nom }}{% endblock %}
+{% block h1 %}{{ categorie.nom }}{% endblock %}
+
+{% block body %}
+
+    <a class="btn btn-primary" href="{{ path('app_categorie_index') }}">Retour</a>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ categorie.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ categorie.nom }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+{% endblock %}

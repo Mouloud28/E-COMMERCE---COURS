@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} | {{ produit.titre|capitalize }}{% endblock %}
+
+{% block h1 %}{{ produit.titre|capitalize }}{% endblock %}
+
+{% block body %}
+
+    <a class="btn btn-primary" href="{{ path('produit_afficher') }}">Retour</a>
+
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <td>{{ produit.id }}</td>
+        </tr>
+        <tr>
+            <th>Titre</th>
+            <td>{{ produit.titre }}</td>
+        </tr>
+        <tr>
+            <th>Prix (€)</th>
+            <td>{{ produit.prix }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ produit.description }}</td>
+        </tr>
+        <tr>
+            <th>Catégorie</th>
+            <td>
+                {% if produit.categorie %}
+                    {{ produit.categorie.nom }}
+                {% else %}
+                    <span class="text-danger fst-italic">N.R</span>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>Matière(s)</th>
+            <td>
+                
+                {#
+                    un objet produit est composé d'au moins un objet matiere
+                    donc produit.matieres est un tableau d'objets matiere
+                #}
+
+                {% for matiere in produit.matieres %}
+                    {{ matiere.nom }}
+                {% endfor %}
+            
+            </td>
+        </tr>
+    </table>
+
+
+{% endblock %}
